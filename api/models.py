@@ -11,10 +11,10 @@ from django.db import models
 
 
 class Address(models.Model):
-    address_id = models.CharField(primary_key=True, max_length=-1)
-    address_line_1 = models.CharField(max_length=-1)
-    address_line_2 = models.CharField(max_length=-1)
-    zip_code = models.CharField(max_length=-1)
+    address_id = models.CharField(primary_key=True, max_length=240)
+    address_line_1 = models.CharField(max_length=240)
+    address_line_2 = models.CharField(max_length=240)
+    zip_code = models.CharField(max_length=240)
     billing = models.BooleanField()
 
     class Meta:
@@ -23,10 +23,10 @@ class Address(models.Model):
 
 
 class Customer(models.Model):
-    customer_id = models.CharField(primary_key=True, max_length=-1)
+    customer_id = models.CharField(primary_key=True, max_length=240)
     organization_business = models.ForeignKey('OrganizationUnit', models.DO_NOTHING)
-    name = models.CharField(max_length=-1)
-    gender = models.CharField(max_length=-1)
+    name = models.CharField(max_length=240)
+    gender = models.CharField(max_length=240)
 
     class Meta:
         managed = False
@@ -34,7 +34,7 @@ class Customer(models.Model):
 
 
 class CustomerAddress(models.Model):
-    id = models.CharField(primary_key=True, max_length=-1)
+    id = models.CharField(primary_key=True, max_length=240)
     customer = models.ForeignKey(Customer, models.DO_NOTHING)
     address = models.ForeignKey(Address, models.DO_NOTHING)
 
@@ -44,9 +44,9 @@ class CustomerAddress(models.Model):
 
 
 class OrganizationUnit(models.Model):
-    organization_business_id = models.CharField(primary_key=True, max_length=-1)
-    name = models.CharField(max_length=-1)
-    description = models.CharField(max_length=-1)
+    organization_business_id = models.CharField(primary_key=True, max_length=240)
+    name = models.CharField(max_length=240)
+    description = models.CharField(max_length=240)
 
     class Meta:
         managed = False
@@ -54,10 +54,10 @@ class OrganizationUnit(models.Model):
 
 
 class Service(models.Model):
-    service_id = models.CharField(primary_key=True, max_length=-1)
+    service_id = models.CharField(primary_key=True, max_length=240)
     service_type = models.ForeignKey('ServiceType', models.DO_NOTHING)
     provider = models.ForeignKey(OrganizationUnit, models.DO_NOTHING)
-    description = models.CharField(max_length=-1)
+    description = models.CharField(max_length=240)
 
     class Meta:
         managed = False
@@ -65,7 +65,7 @@ class Service(models.Model):
 
 
 class ServiceLocation(models.Model):
-    id = models.CharField(primary_key=True, max_length=-1)
+    id = models.CharField(primary_key=True, max_length=240)
     service = models.ForeignKey(Service, models.DO_NOTHING)
     address = models.ForeignKey(Address, models.DO_NOTHING)
     latitude = models.IntegerField()
@@ -77,8 +77,8 @@ class ServiceLocation(models.Model):
 
 
 class ServiceType(models.Model):
-    id = models.CharField(primary_key=True, max_length=-1)
-    description = models.CharField(max_length=-1)
+    id = models.CharField(primary_key=True, max_length=240)
+    description = models.CharField(max_length=240)
 
     class Meta:
         managed = False
